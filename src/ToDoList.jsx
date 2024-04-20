@@ -1,90 +1,127 @@
-import React, {useState} from "react"
+import React, { useState } from "react";
+import { FaEdit } from "react-icons/fa";
 
-function ToDoList(){
+function ToDoList() {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
+  const [taskStatus, setTaskStatus] = useState([]);
 
-    const [tasks, setTask] = useState([]);
-    const [newTask, setNewTask] = useState("");
+  function handleInputChange(event) {
+    setNewTask(event.target.value);
+  }
 
-    function handleInputChange(event){
-        setNewTask(event.target.value);
+  function addTask() {
+    if (editIndex !== null) {
+      const updatedTasks = [...tasks];
+      updatedTasks[editIndex] = newTask;
+      setTasks(updatedTasks);
+      setNewTask("");
+      setEditIndex(null);
+    } else {
+      if (newTask.trim() !== "") {
+        setTasks([...tasks, newTask]);
+        setTaskStatus([...taskStatus, false]); 
+        setNewTask("");
+      }
     }
+  }
 
-    function addTask(){
+  function deleteTask(index) {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    const updatedStatus = [...taskStatus];
+    updatedStatus.splice(index, 1);
+    setTasks(updatedTasks);
+    setTaskStatus(updatedStatus);
+  }
 
-        if(newTask.trim() !== ""){
-            setTask(t  => [...t, newTask]);
-            setNewTask("");
-        }
-        
+  function moveTaskUp(index) {
+    if (index > 0) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index - 1]] = [
+        updatedTasks[index - 1],
+        updatedTasks[index],
+      ];
+      const updatedStatus = [...taskStatus];
+      [updatedStatus[index], updatedStatus[index - 1]] = [
+        updatedStatus[index - 1],
+        updatedStatus[index],
+      ];
+      setTasks(updatedTasks);
+      setTaskStatus(updatedStatus);
     }
+  }
 
-    function deleteTask(index){
-
-        const updatedTask = tasks.filter((element, i) => i !== index);
-        setTask(updatedTask);
-
+  function moveTaskDown(index) {
+    if (index < tasks.length - 1) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index + 1]] = [
+        updatedTasks[index + 1],
+        updatedTasks[index],
+      ];
+      const updatedStatus = [...taskStatus];
+      [updatedStatus[index], updatedStatus[index + 1]] = [
+        updatedStatus[index + 1],
+        updatedStatus[index],
+      ];
+      setTasks(updatedTasks);
+      setTaskStatus(updatedStatus);
     }
+  }
 
-    function moveTaskUp(index){
+  function editTask(index) {
+    setNewTask(tasks[index]);
+    setEditIndex(index);
+  }
 
-        if(index > 0){
-            const updatedTask = [...tasks];
-            [updatedTask[index], updatedTask[index-1]] = [updatedTask[index-1], updatedTask[index]]
-            setTask(updatedTask);
-        }
+  function toggleTaskStatus(index) {
+    const updatedStatus = [...taskStatus];
+    updatedStatus[index] = !updatedStatus[index];
+    setTaskStatus(updatedStatus);
+  }
 
-    }
-
-    function moveTaskDown(index){
-
-        if(index < tasks.length - 1){
-            const updatedTask = [...tasks];
-            [updatedTask[index], updatedTask[index+1]] = [updatedTask[index+1], updatedTask[index]]
-            setTask(updatedTask);
-        }
-
-    }
-
-    return (
-        <div className="to-do-list">
-
-            <h1>tO-dO GENSIS</h1>
-            <div>
-                <input type="text"
-                placeholder="Enter a task."
-                value={newTask}
-                onChange={handleInputChange} />
-
-                <button className="add-button"
-                onClick={addTask}>
-                    ADD
-                </button>
-            </div>
-
-            <ol>
-                {tasks.map((tasks, index) => 
-                <li key={index}>
-                    <span className="text">{tasks}</span>
-                    <button className="delete-button"
-                    onClick={() => deleteTask(index)}>
-                        DELETE
-                    </button>
-
-                    <button className="move-button"
-                    onClick={() => moveTaskUp(index)}>
-                        UP
-                    </button>
-
-                    <button className="move-button"
-                    onClick={() => moveTaskDown(index)}>
-                        DOWN
-                    </button>
-                </li>
-            )}
-            </ol>
-
+  return (
+    <div className="to-do-list">
+      <div className="card">
+        <h1>TO DO GENESIS</h1>
+        <div className="input-card">
+          <div className="input-container">
+            <input
+              type="text"
+              placeholder="Enter a task"
+              value={newTask}
+              onChange={handleInputChange}
+              className="input-field"
+            />
+            <button className="add-button" onClick={addTask}>
+              {editIndex !== null ? "Update" : "Add"}
+            </button>
+          </div>
         </div>
-    );
+        <ol className="task-list">
+          {tasks.map((task, index) => (
+            <li key={index} >
+              <input type="checkbox" checked={taskStatus[index]} onChange={() => toggleTaskStatus(index)} />
+              <span style={{ textDecoration: taskStatus[index] ? "line-through" : "none" }}>{task}</span>
+              {taskStatus[index] ? null : (<button className="edit" onClick={() => editTask(index)}>
+              <FaEdit />
+              </button>)}
+              <button className="delete" onClick={() => deleteTask(index)}>
+                Delete
+              </button>
+              <button className="move-up" onClick={() => moveTaskUp(index)}>
+                UP
+              </button>
+              <button className="move-down" onClick={() => moveTaskDown(index)}>
+                DOWN
+              </button>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  );
 }
 
-export default ToDoList
+export default ToDoList;

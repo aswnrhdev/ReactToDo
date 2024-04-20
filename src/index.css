@@ -1,78 +1,139 @@
-body{
-  background-color: hsl(0, 0%, 10%);
-}
-
-.to-do-list{
+body {
+  margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
-  text-align: center;
-  margin-top: 100px;
+  background: linear-gradient(to bottom right, hwb(0 13% 87%), #000000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-h1{
-  font-size: 4rem;
+.card {
+  background: linear-gradient(to bottom, #ffffff, hwb(0 0% 100%));
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 70px;
+  width: 600px;
 }
 
-button{
-  font-size: 1.7rem;
-  font-weight: bold;
-  padding: 10px 20px;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.5 ease;
-}
-
-.add-button{
-  background-color: hsl(125, 47%, 54%);
-}
-.add-button:hover{
-  background-color: hsl(125, 47%, 44%);
-}
-
-.delete-button{
-  background-color: hsl(10, 90%, 54%);
-}
-.delete-button:hover{
-  background-color: hsl(10, 90%, 40%);
-}
-
-.move-button{
-  background-color: hsl(207, 90%, 64%);
-}
-.move-button:hover{
-  background-color: hsl(207, 90%, 54%);
-}
-
-input[type="text"]{
-  font-size: 1.6rem;
-  padding: 10px;
-  border: 2px solid hsla(0, 0%, 80%, 0.5);
-  color: hsla(0, 0%, 0%, 0.5);
-}
-
-ol{
+.card ol {
+  list-style-type: none;
   padding: 0;
 }
 
-li{
-  font-size: 2rem;
-  font-weight: bold;
-  padding: 15px;
-  background-color: hsl(0, 0%, 97%);
-  margin-bottom: 10px;
-  border: 3px solid hsla(0, 0%, 85%, 0.75);
-  border-radius: 5px;
+.card ol li {
+  padding: 20px;
+  background: linear-gradient(to bottom, hwb(0 0% 100%), #000000);
+  border-radius: 10px;
+  margin-bottom: 5px;
+  color: white;
+  border: none;
+}
+.card ol li .edit {
+  background: linear-gradient(to bottom right, hwb(186 0% 0%), #000000);
+  color: white;
+  padding: 10px;
+}
+
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000000;
+  font-weight: 900;
+  font-family: sans-serif;
+  font-size: 36px;
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to right, hwb(303 0% 69%), #000000); */
+}
+
+ol {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 5px;
 }
 
-.text{
-  flex: 1;
+li span {
+  flex-grow: 1;
 }
 
-.delete-button, .move-button{
-  padding: 8px 12px;
-  font-size: 1.4 rem;
-  margin-left: 10px;
+.card ol li .delete {
+  background: linear-gradient(to bottom right, hwb(0 0% 0%), #000000);
+  color: white;
+  padding: 10px;
+}
+
+.card ol li .move-up {
+  background: linear-gradient(to bottom right, hwb(186 0% 0%), #000000);
+  color: white;
+  padding: 10px;
+}
+
+.card ol li .move-down {
+  background: linear-gradient(to bottom right, hwb(186 0% 0%), #000000);
+  color: white;
+  padding: 10px;
+}
+
+.card ol li button:hover {
+  background-color: #333333;
+}
+
+.card ol li button {
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.input-card {
+  background: linear-gradient(to bottom, hwb(0 0% 100%), #000000);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 558px;
+  margin-bottom: 20px;
+}
+
+.input-card .input-container {
+  display: flex;
+  align-items: stretch;
+}
+
+.input-card .input-container input[type="text"] {
+  flex-grow: 1;
+  background: linear-gradient(to bottom right, #ffffff, #646464);
+  padding: 20px;
+  border: 1px ;
+  border-radius: 10px 0 0 10px;
+  font-size: 16px;
+  outline: none; 
+}
+
+.input-card .input-container button.add-button {
+  padding: 15px 20px;
+  border: none;
+  background: linear-gradient(to bottom right, #09ff00, #000000);
+  color: white;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
 }
