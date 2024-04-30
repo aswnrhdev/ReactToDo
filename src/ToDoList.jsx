@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 
 function ToDoList() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
   const [newTask, setNewTask] = useState("");
   const [editIndex, setEditIndex] = useState(null);
-  const [taskStatus, setTaskStatus] = useState([]);
+  const [taskStatus, setTaskStatus] = useState(() => {
+    const savedStatus = localStorage.getItem("taskStatus");
+    return savedStatus ? JSON.parse(savedStatus) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("taskStatus", JSON.stringify(taskStatus));
+  }, [tasks, taskStatus]);
 
   function handleInputChange(event) {
     setNewTask(event.target.value);
@@ -20,9 +31,15 @@ function ToDoList() {
       setEditIndex(null);
     } else {
       if (newTask.trim() !== "") {
-        setTasks([...tasks, newTask]);
-        setTaskStatus([...taskStatus, false]); 
-        setNewTask("");
+        if (!tasks.includes(newTask)) {
+          setTasks([...tasks, newTask]);
+          setTaskStatus([...taskStatus, false]);
+          setNewTask("");
+        } else {
+          alert("Task already exists!");
+        }
+      } else {
+        alert("Please type something below.");
       }
     }
   }
@@ -101,19 +118,34 @@ function ToDoList() {
         </div>
         <ol className="task-list">
           {tasks.map((task, index) => (
-            <li key={index} >
-              <input type="checkbox" checked={taskStatus[index]} onChange={() => toggleTaskStatus(index)} />
-              <span style={{ textDecoration: taskStatus[index] ? "line-through" : "none" }}>{task}</span>
-              {taskStatus[index] ? null : (<button className="edit" onClick={() => editTask(index)}>
-              <FaEdit />
-              </button>)}
+            <li key={index}>
+              <input
+                type="checkbox"
+                checked={taskStatus[index]}
+                onChange={() => toggleTaskStatus(index)}
+              />
+              <span
+                style={{
+                  textDecoration: taskStatus[index] ? "line-through" : "none",
+                }}
+              >
+                {task}
+              </span>
+              {taskStatus[index] ? null : (
+                <button className="edit" onClick={() => editTask(index)}>
+                  <FaEdit />
+                </button>
+              )}
               <button className="delete" onClick={() => deleteTask(index)}>
                 Delete
               </button>
               <button className="move-up" onClick={() => moveTaskUp(index)}>
                 UP
               </button>
-              <button className="move-down" onClick={() => moveTaskDown(index)}>
+              <button
+                className="move-down"
+                onClick={() => moveTaskDown(index)}
+              >
                 DOWN
               </button>
             </li>
