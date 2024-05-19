@@ -1,8 +1,11 @@
 import ToDoList from "./ToDoList"
 
 function App() {
-  return(
-    <ToDoList />
+  return (
+    <div className="app">
+      <div className="background-image"></div>
+      <ToDoList />
+    </div>
   )
 }
 
