@@ -9,3 +9,6 @@ Features
 - Reorder tasks
 - Dynamic quotes displayed on the page
 - Persistent data storage using localStorage
+
+Please click on the link below for the live demo.
+https://react-to-do-tau-pied.vercel.app/
