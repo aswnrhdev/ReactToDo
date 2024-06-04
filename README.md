@@ -16,7 +16,7 @@ This repository contains the codebase for a ToDo application developed with Reac
 
 ## Live Demo
 
-Check out the live demo of the ToDo App [here](https://react-to-do-tau-pied.vercel.app/).
+Check out the live demo of the ToDo App [here](https://react-to-do-tau-pied.vercel.app/)
 
 ## Getting Started
 
