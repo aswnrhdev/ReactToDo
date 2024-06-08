@@ -1,6 +1,6 @@
 # ToDo App
 
-Welcome to the ToDo App repository! This is a simple ToDo application built using React.js.
+Welcome to the ToDo App repository! This is a simple ToDo application built using React.js
 
 ## Introduction
 
