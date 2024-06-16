@@ -12,7 +12,7 @@ This repository contains the codebase for a ToDo application developed with Reac
 - **Task Completion**: Mark tasks as completed for better organization.
 - **Task Reordering**: Easily reorder tasks as per your priority.
 - **Dynamic Quotes**: Get inspired with dynamic quotes displayed on the page.
-- **Persistent Data Storage**: Your tasks persist even after refreshing the page, thanks to localStorage.
+- **Persistent Data Storage**: Your tasks persist even after refreshing the page, thanks to localStorage
 
 ## Live Demo
 
