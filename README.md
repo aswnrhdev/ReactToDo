@@ -20,7 +20,7 @@ Check out the live demo of the ToDo App [here](https://react-to-do-tau-pied.verc
 
 ## Getting Started
 
-To get started with this project, follow these steps:
+To get started with this project, follow these steps
 
 1. Clone this repository to your local machine.
 2. Install the necessary dependencies using npm or yarn.
