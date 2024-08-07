@@ -1,9 +1,5 @@
 # ToDo App
 
-Welcome to the ToDo App repository! This is a simple ToDo application built using React.js
-
-## Introduction
-
 This repository contains the codebase for a ToDo application developed with React.js. It offers essential features for managing tasks, including adding, deleting, and editing tasks, marking tasks as completed, reordering tasks, displaying dynamic quotes on the page and persistent data storage using localStorage
 
 ## Features
